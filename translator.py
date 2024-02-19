@@ -1,10 +1,12 @@
 import time
-
 from bs4 import BeautifulSoup
 import requests
 import translators as ts
 import os
 
+#There are two ways for translating HTML files.
+#Way 1 is superior due to the inclusion of CSS components, making it compatible with existing HTML files downloaded using links.py:
+'''
 os.chdir("/new/Web_Scrapping/Flask/templates")
 unfinished = []
 
@@ -41,11 +43,13 @@ for filename in unfinished:
             wfile.write(translated_text)
             wfile.write("\n")
 '''
+#Way 2 will directly download translated HTML files and store them:
+'''
 url = 'https://12factor.net/'
 response = requests.get(url)
 soup = BeautifulSoup(response.content, 'html.parser')
 links = [url + (a.get('href')[2:]) for a in soup.find_all('a', href=True) if a['href'].startswith('./')]
-unfinished_links = ['https://12factor.net/port-binding', 'https://12factor.net/backing-services', 'https://12factor.net/admin-processes']
+unfinished_links = []
 
 for link in links:
     time.sleep(1)
