@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Servizi di supporto</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <article><h2 id="iv_backing_services">IV. Servizi di supporto</h2>
+                <h3 id="treat_backing_services_as_attached_resources">Considerare i servizi di supporto come risorse
+                    collegate</h3>
+                <p>Un<em>Servizio di supporto</em>è qualsiasi servizio che l'app utilizza in rete come parte del suo
+                    normale funzionamento. Gli esempi includono gli archivi dati (ad esempio<a
+                            href="http://dev.mysql.com/">MySQL</a>o<a href="http://couchdb.apache.org/">CouchDB</a>), i
+                    sistemi di messaggistica/accodamento (ad esempio<a href="http://www.rabbitmq.com/">ConiglioMQ</a>o<a
+                            href="https://beanstalkd.github.io">Gambo di fagioli</a>), i servizi SMTP per la posta
+                    elettronica in uscita (ad esempio<a href="http://www.postfix.org/">Postfix</a>) e i sistemi di
+                    memorizzazione nella cache (ad esempio<a href="http://memcached.org/">Memcached</a>).</p>
+                <p>I servizi di supporto, come il database, sono tradizionalmente gestiti dagli stessi amministratori di
+                    sistema che distribuiscono il runtime dell'app. Oltre a questi servizi gestiti localmente, l'app può
+                    avere anche servizi forniti e gestiti da terze parti. Gli esempi includono i servizi SMTP (ad
+                    esempio<a href="http://postmarkapp.com/">Timbro postale</a>), i servizi di raccolta delle metriche
+                    (ad esempio<a href="http://newrelic.com/">Nuova reliquia</a>o<a href="http://www.loggly.com/">A
+                        fatica</a>), i servizi di asset binari (come<a href="http://aws.amazon.com/s3/">Amazon S3</a>) e
+                    persino servizi per i consumatori accessibili tramite API (come<a href="http://dev.twitter.com/">Cinguettare</a>,<a
+                            href="https://developers.google.com/maps/">Mappe di Google</a>o<a
+                            href="http://www.last.fm/api">Last.fm</a>).</p>
+                <p><strong>Il codice di un'app a dodici fattori non fa distinzione tra servizi locali e di terze
+                    parti.</strong>All'app, entrambe sono risorse collegate, a cui si accede tramite un URL o un altro
+                    localizzatore/credenziali archiviate nel file<a href="./config">configurazione</a>. Un<a
+                            href="./codebase">schierare</a>dell'app a dodici fattori dovrebbe essere in grado di
+                    scambiare un database MySQL locale con uno gestito da terze parti (ad esempio<a
+                            href="http://aws.amazon.com/rds/">Amazon RDS</a>) senza alcuna modifica al codice dell'app.
+                    Allo stesso modo, un server SMTP locale può essere scambiato con un servizio SMTP di terze parti (ad
+                    esempio Postmark) senza modifiche al codice. In entrambi i casi, è necessario modificare solo
+                    l'handle di risorsa nella configurazione.</p>
+                <p>Ogni servizio di supporto distinto è un<em>risorsa</em>. Ad esempio, un database MySQL è una risorsa;
+                    due database MySQL (utilizzati per il partizionamento orizzontale a livello di applicazione) si
+                    qualificano come due risorse distinte. L'app a dodici fattori tratta questi database come<em>Risorse
+                        collegate</em>, che indica il loro accoppiamento libero al dispiegamento a cui sono collegati.
+                </p>
+                <p><img alt="A production deploy attached to four backing services." class="full"
+                        src="/images/attached-resources.png"/></p>
+                <p>Le risorse possono essere collegate e scollegate dalle distribuzioni a piacimento. Ad esempio, se il
+                    database dell'app si comporta in modo anomalo a causa di un problema hardware, l'amministratore
+                    dell'app potrebbe avviare un nuovo server di database ripristinato da un backup recente. È stato
+                    possibile scollegare il database di produzione corrente e collegare il nuovo database, il tutto
+                    senza alcuna modifica al codice.</p></article>
+        </div>
+    </div>
+    <div class="text-center mt-3" id="locales"><a href="/backing-services">English (en) </a> | <span> Italiano (it)</span></div>
+</div>
+</body>
+</html>
+

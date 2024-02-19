@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Processi amministrativi</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <article><h2 id="xii_admin_processes">XII. Processi amministrativi</h2>
+                <h3 id="run_adminmanagement_tasks_as_oneoff_processes">Eseguire attività di amministrazione/gestione
+                    come processi una tantum</h3>
+                <p>Le<a href="./concurrency">Formazione del processo</a>è la matrice di processi usati per eseguire le
+                    normali attività dell'app, ad esempio la gestione delle richieste Web, durante l'esecuzione.
+                    Separatamente, gli sviluppatori spesso desiderano eseguire attività amministrative o di manutenzione
+                    una tantum per l'app, ad esempio:</p>
+                <ul>
+                    <li>L'esecuzione di migrazioni di database (ad es.<code>manage.py eseguire la migrazione</code>in
+                        Django,<code>Rake db:migrate</code>in Rotaie).
+                    </li>
+                    <li>L'esecuzione di una console (nota anche come<a
+                            href="http://en.wikipedia.org/wiki/Read-eval-print_loop">REPL</a>shell) per eseguire codice
+                        arbitrario o controllare i modelli dell'app rispetto al database attivo. La maggior parte delle
+                        lingue fornisce un REPL eseguendo l'interprete senza argomenti (ad es.<code>pitone</code>o<code>Perl</code>)
+                        o in alcuni casi hanno un comando separato (ad es.<code>IRB (Italiano)</code>per Rubino,<code>Consolle
+                            di binari</code>per le rotaie).
+                    </li>
+                    <li>L'esecuzione di script una tantum di cui è stato eseguito il commit nel repository dell'app (ad
+                        es.<code>Script PHP/fix_bad_records.php</code>).
+                    </li>
+                </ul>
+                <p>I processi amministrativi una tantum devono essere eseguiti in un ambiente identico a quello dei
+                    normali processi di amministrazione<a href="./processes">Processi a esecuzione prolungata</a>dell'app.
+                    Corrono contro un<a href="./build-release-run">rilascio</a>, utilizzando lo stesso<a
+                            href="./codebase">Base di codice</a>e<a href="./config">configurazione</a>come qualsiasi
+                    processo eseguito su quella versione. Il codice amministratore deve essere fornito con il codice
+                    dell'applicazione per evitare problemi di sincronizzazione.</p>
+                <p>Lo stesso<a href="./dependencies">Isolamento delle dipendenze</a>dovrebbero essere utilizzate su
+                    tutti i tipi di processo. Ad esempio, se il processo web Ruby utilizza il comando<code>Bundle Exec
+                        Thin Start</code>, una migrazione del database deve utilizzare<code>bundle exec rake
+                        db:migrate</code>. Allo stesso modo, un programma Python che usa Virtualenv dovrebbe usare il
+                    vendored<code>bin/python</code>per l'esecuzione sia del server web Tornado che di qualsiasi<code>manage.py</code>processi
+                    amministrativi.</p>
+                <p>Twelve-factor favorisce fortemente i linguaggi che forniscono una shell REPL pronta all'uso e che
+                    semplificano l'esecuzione di script una tantum. In una distribuzione locale, gli sviluppatori
+                    richiamano processi di amministrazione una tantum tramite un comando shell diretto all'interno della
+                    directory di estrazione dell'app. In una distribuzione di produzione, gli sviluppatori possono
+                    utilizzare ssh o un altro meccanismo di esecuzione di comandi remoti fornito dall'ambiente di
+                    esecuzione della distribuzione per eseguire tale processo.</p></article>
+        </div>
+    </div>
+    <div class="text-center mt-3" id="locales"><a href="/admin-processes">English (en) </a> | <span> Italiano (it)</span></div>
+</div>
+</body>
+</html>
+

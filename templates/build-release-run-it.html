@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Build, Release, Run</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <article><h2 id="v_build_release_run">V. build, rilascio, corsa</h2>
+                <h3 id="strictly_separate_build_and_run_stages">Fasi di build ed esegui rigorosamente separate</h3>
+                <p>UNA UN<a href="./codebase">CODEBASE</a>si trasforma in un (non sviluppo) distribuito attraverso tre
+                    fasi:</p>
+                <ul>
+                    <li>La Il<em>fase di costruzione</em>è una trasformazione che converte un repository di codice in un
+                        pacchetto eseguibile noto come a<em>costruire</em>. Utilizzando una versione del codice in un
+                        commit specificato dal processo di distribuzione, il palcoscenico di build recupera i
+                        fornitori<a href="./dependencies">dipendenze</a>e compila binari e risorse.
+                    </li>
+                    <li>La Il<em>fase di rilascio</em>prende la build prodotta dalla fase di build e la combina con
+                        l'attuale di Deploy<a href="./config">configurazione</a>. Il risultato<em>pubblicazione</em>Contiene
+                        sia la build che la configurazione ed è pronto per l'esecuzione immediata nell'ambiente di
+                        esecuzione.
+                    </li>
+                    <li>La Il<em>Run Stage</em>(noto anche come "runtime") esegue l'app nell'ambiente di esecuzione,
+                        lanciando alcuni set di app<a href="./processes">processi</a>contro una versione selezionata.
+                    </li>
+                </ul>
+                <p><img alt="Code becomes a build, which is combined with config to create a release."
+                        src="/images/release.png"/></p>
+                <p><strong>L'app a dodici fattori utilizza una separazione rigorosa tra le fasi di build, rilascio e
+                    esecuzione.</strong>Ad esempio, è impossibile apportare modifiche al codice in fase di esecuzione,
+                    poiché non c'è modo di propagare tali modifiche alla fase di build.</p>
+                <p>Gli strumenti di distribuzione offrono in genere strumenti di gestione del rilascio, in particolare
+                    la possibilità di tornare a una versione precedente. Ad esempio, il<a
+                            href="https://github.com/capistrano/capistrano/wiki">Capistrano</a>Le versioni degli
+                    strumenti di distribuzione dei rilasci in una sottodirectory denominati<code>rilasci</code>, dove
+                    l'attuale versione è un collegamento simbolico per la directory di rilascio corrente. Suo<code>rollback</code>Il
+                    comando semplifica il ritorno rapidamente a una versione precedente.</p>
+                <p>Ogni versione dovrebbe sempre avere un ID di rilascio univoco, come un timestamp del rilascio
+                    (come<code>2011-04-06-20: 32: 17</code>) o un numero incrementale (come<code>V100</code>). Le
+                    versioni sono un libro mastro solo per appendici e una versione non può essere mutata una volta
+                    creata. Qualsiasi modifica deve creare una nuova versione.</p>
+                <p>Le build vengono avviate dagli sviluppatori dell'app ogni volta che viene distribuito un nuovo
+                    codice. L'esecuzione di runtime, al contrario, può avvenire automaticamente in casi come un riavvio
+                    del server o un processo arrestato in crash riavviato dal Gestore di processo. Pertanto, la fase di
+                    corsa dovrebbe essere mantenuta al minor numero possibile di parti mobili, poiché i problemi che
+                    impediscono a un'app possono farla rompersi nel mezzo della notte in cui nessun sviluppatore è a
+                    portata di mano. La fase di costruzione può essere più complessa, poiché gli errori sono sempre in
+                    primo piano per uno sviluppatore che sta guidando la distribuzione.</p></article>
+        </div>
+    </div>
+    <div class="text-center mt-3" id="locales"><a href="/build-release-run">English (en) </a> | <span> Italiano (it)</span></div>
+</div>
+</body>
+</html>
+

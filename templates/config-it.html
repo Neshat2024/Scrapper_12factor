@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Configurazione</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <article><h2 id="iii_config">Iii. Configurazione</h2>
+                <h3 id="store_config_in_the_environment">Memorizza la configurazione nell'ambiente</h3>
+                <p>Un'app<em>configurazione</em>è tutto ciò che probabilmente variare tra<a
+                        href="./codebase">schiera</a>(Staging, produzione, ambienti per sviluppatori, ecc.). Ciò
+                    comprende:</p>
+                <ul>
+                    <li>Resource Hands to the Database, Memcached e altro<a href="./backing-services">Servizi di
+                        supporto</a></li>
+                    <li>Credenziali a servizi esterni come Amazon S3 o Twitter</li>
+                    <li>Valori per distribuzione come il nome host canonico per la distribuzione</li>
+                </ul>
+                <p>Le app a volte archiviano la configurazione come costanti nel codice. Questa è una violazione di
+                    dodici fattori, che richiede<strong>Separazione rigorosa della configurazione dal codice</strong>.
+                    La configurazione varia sostanzialmente tra i distribuzioni, il codice no.</p>
+                <p>Una cartina di tornasole per se un'app ha una configurazione corretta dal codice è se la base di
+                    codice potrebbe essere resa open source in qualsiasi momento, senza compromettere alcuna
+                    credenziali.</p>
+                <p>Si noti che questa definizione di "config" lo fa<strong>non</strong>includere la configurazione
+                    dell'applicazione interna, come ad esempio<code>config/routes.rb</code>nei binari o come<a
+                            href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/beans.html">I
+                        moduli di codice sono connessi</a>nella nel<a href="http://spring.io/">Primavera</a>. Questo
+                    tipo di configurazione non varia tra le distribuzioni, e quindi è meglio eseguire nel codice.</p>
+                <p>Un altro approccio alla configurazione è l'uso di file di configurazione che non vengono controllati
+                    nel controllo della revisione, come<code>config/database.yml</code>nelle rotaie. Questo è un enorme
+                    miglioramento rispetto all'utilizzo di costanti che vengono controllate nel Repo di codice, ma ha
+                    ancora debolezze: è facile controllare erroneamente un file di configurazione al repository; C'è una
+                    tendenza per i file di configurazione da dispersi in diversi luoghi e formati diversi, rendendo
+                    difficile vedere e gestire tutta la configurazione in un unico posto. Inoltre, questi formati
+                    tendono ad essere specifici della lingua o del framework.</p>
+                <p><strong>I dodici app store store config in<em>variabili ambientali</em></strong>(spesso abbreviato
+                    a<em>env vars</em>O<em>env</em>). I var Env sono facili da cambiare tra le distribuzioni senza
+                    modificare alcun codice; A differenza dei file di configurazione, ci sono poche possibilità che
+                    vengano controllati accidentalmente nel Codice Repo; E a differenza dei file di configurazione
+                    personalizzati o di altri meccanismi di configurazione come le proprietà del sistema Java, sono uno
+                    standard di linguaggio e sistema operativo.</p>
+                <p>Un altro aspetto della gestione delle configurazioni è il raggruppamento. A volte le app batch config
+                    in gruppi nominati (spesso chiamati "ambienti") che prende il nome da distribuzioni specifiche, come
+                    il<code>sviluppo</code>,<code>test</code>, E<code>produzione</code>ambienti nelle rotaie. Questo
+                    metodo non si ridimensiona in modo pulito: man mano che vengono creati più distribuzioni dell'app,
+                    sono necessari nuovi nomi di ambiente, come ad esempio<code>staging</code>O<code>QA</code>. Man mano
+                    che il progetto cresce ulteriormente, gli sviluppatori possono aggiungere i propri ambienti speciali
+                    come<code>Joes-Staging</code>, risultando in un'esplosione combinatoria di configurazione che rende
+                    molto fragile la gestione delle distribuzioni dell'app.</p>
+                <p>In un'app a dodici fattori, i vars ENV sono controlli granulari, ciascuno completamente ortogonale ad
+                    altri var Env. Non sono mai raggruppati come "ambienti", ma invece sono gestiti in modo indipendente
+                    per ogni distribuzione. Questo è un modello che si ridimensiona senza intoppi mentre l'app si
+                    espande naturalmente in più distribuzioni nel corso della sua vita.</p></article>
+        </div>
+    </div>
+    <div class="text-center mt-3" id="locales"><a href="/config">English (en) </a> | <span> Italiano (it)</span></div>
+</div>
+</body>
+</html>
+

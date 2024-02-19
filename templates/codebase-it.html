@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>CODEBASE</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <article><h2 id="i_codebase">I. CODEBASE</h2>
+                <h3 id="one_codebase_tracked_in_revision_control_many_deploys">Una base di codice tracciata nel
+                    controllo di revisione, molti distribuzioni</h3>
+                <p>Un'app di dodici fattori viene sempre monitorata in un sistema di controllo della versione, come<a
+                        href="http://git-scm.com/">Idiota</a>,<a href="https://www.mercurial-scm.org/">Mercuriale</a>, O<a
+                        href="http://subversion.apache.org/">Sovversione</a>. Una copia del database di tracciamento
+                    della revisione è nota come a<em>repository di codice</em>, spesso abbreviato a<em>Codice Repo</em>o
+                    solo<em>Repo</em>.</p>
+                <p>UNA UN<em>CODEBASE</em>è un singolo repository (in un sistema di controllo di revisione centralizzato
+                    come la sovversione) o qualsiasi insieme di repository che condividono un commit radicale (in un
+                    sistema di controllo di revisione decentralizzato come Git).</p>
+                <p><img alt="One codebase maps to many deploys" src="/images/codebase-deploys.png"/></p>
+                <p>Esiste sempre una correlazione individuale tra la base di codice e l'app:</p>
+                <ul>
+                    <li>Se ci sono più basi di codice, non è un'app: è un sistema distribuito. Ogni componente in un
+                        sistema distribuito è un'app e ciascuno può essere conforme individuale a dodici fattori.
+                    </li>
+                    <li>Più app che condividono lo stesso codice sono una violazione di dodici fattori. La soluzione qui
+                        è fare il fatto di fare il codice condiviso in librerie che possono essere incluse attraverso<a
+                                href="./dependencies">Dipendency Manager</a>.
+                    </li>
+                </ul>
+                <p>C'è solo una base di codice per app, ma ci saranno molti distribuzioni dell'app.
+                    UN<em>distribuire</em>è un'istanza in esecuzione dell'app. Questo è in genere un sito di produzione
+                    e uno o più siti di stadiazione. Inoltre, ogni sviluppatore ha una copia dell'app in esecuzione nel
+                    proprio ambiente di sviluppo locale, ognuna delle quali si qualifica anche come distribuzione.</p>
+                <p>La base di codice è la stessa in tutte le distribuzioni, sebbene diverse versioni possano essere
+                    attive in ciascuna distribuzione. Ad esempio, uno sviluppatore ha alcuni commit non ancora
+                    distribuiti alla messa in scena; La messa in scena ha alcuni impegni non ancora dispiegati in
+                    produzione. Ma condividono tutti la stessa base di codice, rendendoli così identificabili come
+                    distribuzioni diverse della stessa app.</p></article>
+        </div>
+    </div>
+    <div class="text-center mt-3" id="locales"><a href="/codebase">English (en) </a> | <span> Italiano (it)</span></div>
+</div>
+</body>
+</html>
+

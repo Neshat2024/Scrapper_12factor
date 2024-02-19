@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Concorrenza</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <article><h2 id="viii_concurrency">Viii. Concorrenza</h2>
+                <h3 id="scale_out_via_the_process_model">Ridimensionare tramite il modello di processo</h3>
+                <p>Qualsiasi programma per computer, una volta eseguito, è rappresentato da uno o più processi. Le app
+                    Web hanno assunto una varietà di moduli di esecuzione di processo. Ad esempio, i processi PHP
+                    vengono eseguiti come processi figlio di Apache, avviati su richiesta, se necessario per volume di
+                    richiesta. I processi Java adottano l'approccio opposto, con il JVM che fornisce un enorme
+                    uberprocess che si riserva un grande blocco di risorse di sistema (CPU e memoria) all'avvio, con
+                    concorrenza gestita internamente tramite thread. In entrambi i casi, i processi di esecuzione (ES)
+                    sono solo minimamente visibili agli sviluppatori dell'app.</p>
+                <p><img alt="Scale is expressed as running processes, workload diversity is expressed as process types."
+                        src="/images/process-types.png"/></p>
+                <p><strong>Nell'app a dodici fattori, i processi sono un cittadino di prima classe.</strong>I processi
+                    nell'app a dodici fattori prendono segnali forti da<a
+                            href="https://adam.herokuapp.com/past/2011/5/9/applying_the_unix_process_model_to_web_apps/">Il
+                        modello di processo unix per l'esecuzione dei demoni del servizio</a>. Utilizzando questo
+                    modello, lo sviluppatore può architelare la propria app per gestire diversi carichi di lavoro
+                    assegnando ogni tipo di lavoro a a<em>Tipo di processo</em>. Ad esempio, le richieste HTTP possono
+                    essere gestite da un processo Web e attività di fondo di lunga data gestite da un processo di
+                    lavoratore.</p>
+                <p>Ciò non esclude i singoli processi dalla gestione del proprio multiplexing interno, tramite thread
+                    all'interno della VM di runtime, o il modello asincrone/evento trovato in strumenti come<a
+                            href="https://github.com/eventmachine/eventmachine">Eventmachine</a>,<a
+                            href="http://twistedmatrix.com/trac/">Attorcigliato</a>, O<a href="http://nodejs.org/">Node.js</a>.
+                    Ma una singola VM può crescere solo così grande (scala verticale), quindi l'applicazione deve anche
+                    essere in grado di coprire più processi in esecuzione su più macchine fisiche.</p>
+                <p>Il modello di processo brilla davvero quando arriva il momento di scalare. IL<a href="./processes">NATURA
+                    NOTTORE, NOTTO ORIZZONALMENTE CONTRIZIONALI DEI PROCESSI APP DODIFICATORI</a>significa che
+                    l'aggiunta di più concorrenza è un'operazione semplice e affidabile. L'array di tipi di processo e
+                    il numero di processi di ciascun tipo è noto come<em>Formazione di processo</em>.</p>
+                <p>Processi di app dodici fattori<a href="http://dustin.github.com/2010/02/28/running-processes.html">non
+                    dovrebbe mai demonizzare</a>o scrivere file PID. Invece, fai affidamento sul gestore del processo
+                    del sistema operativo (come ad esempio<a href="https://www.freedesktop.org/wiki/Software/systemd/">SystemD</a>,
+                    un gestore di processo distribuito su una piattaforma cloud o uno strumento come<a
+                            href="http://blog.daviddollar.org/2011/05/06/introducing-foreman.html">Caposquadra</a>in
+                    sviluppo) per gestire<a href="./logs">flussi di output</a>, Rispondi ai processi arrestati e
+                    gestisce i riavvii e gli arresti avviati dall'utente.</p></article>
+        </div>
+    </div>
+    <div class="text-center mt-3" id="locales"><a href="/concurrency">English (en) </a> | <span> Italiano (it)</span></div>
+</div>
+</body>
+</html>
+

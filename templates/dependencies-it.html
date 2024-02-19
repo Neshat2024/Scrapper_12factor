@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Dipendenze</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <article><h2 id="ii_dependencies">Ii. Dipendenze</h2>
+                <h3 id="explicitly_declare_and_isolate_dependencies">Dichiarare esplicitamente e isolare le
+                    dipendenze</h3>
+                <p>La maggior parte dei linguaggi di programmazione offre un sistema di imballaggio per la distribuzione
+                    di librerie di supporto, come<a href="http://www.cpan.org/">Cpan</a>per perl o<a
+                            href="http://rubygems.org/">Rubygems</a>per Ruby. Le librerie installate tramite un sistema
+                    di imballaggio possono essere installate a livello di sistema (noto come "pacchetti di siti") o
+                    ammesse nella directory contenente l'app (nota come "venditori" o "bundling").</p>
+                <p><strong>Un'app di dodici fattori non si basa mai sull'esistenza implicita di pacchetti a livello di
+                    sistema.</strong>Dichiara tutte le dipendenze, completamente ed esattamente, tramite a<em>Dichiarazione
+                    di dipendenza</em>manifesto. Inoltre, usa un<em>Isolamento della dipendenza</em>Strumento durante
+                    l'esecuzione per garantire che nessuna dipendenza implicita "perdi" dal sistema circostante. La
+                    specifica di dipendenza completa ed esplicita viene applicata in modo uniforme sia alla produzione
+                    che allo sviluppo.</p>
+                <p>Per esempio,<a href="https://bundler.io/">Bundler</a>per Ruby offre il<code>Gemfile</code>formato
+                    manifesto per la dichiarazione di dipendenza e<code>Bundle Exec</code>per l'isolamento della
+                    dipendenza. In Python ci sono due strumenti separati per questi passaggi -<a
+                            href="http://www.pip-installer.org/en/latest/">PIP</a>viene utilizzato per la dichiarazione
+                    e<a href="http://www.virtualenv.org/en/latest/">Virtualenv</a>per isolamento. Anche C ha<a
+                            href="http://www.gnu.org/s/autoconf/">Autoconf</a>Per la dichiarazione di dipendenza e il
+                    collegamento statico possono fornire l'isolamento della dipendenza. Indipendentemente da ciò che la
+                    toolchain, la dichiarazione di dipendenza e l'isolamento devono sempre essere usati insieme-solo
+                    l'uno o l'altro non sono sufficienti per soddisfare dodici fattori.</p>
+                <p>Uno dei vantaggi della dichiarazione di dipendenza esplicita è che semplifica la configurazione per
+                    gli sviluppatori nuovi nell'app. Il nuovo sviluppatore può consultare la base di codice dell'app
+                    sulla loro macchina di sviluppo, richiedendo solo il runtime della lingua e il gestore delle
+                    dipendenze installate come prerequisiti. Saranno in grado di impostare tutto il necessario per
+                    eseguire il codice dell'app con un deterministico<em>Comando di build</em>. Ad esempio, il comando
+                    build per Ruby/Bundler è<code>Installazione del fascio</code>, mentre per Clojure/<a
+                            href="https://github.com/technomancy/leiningen#readme">Liner</a>è<code>Lein Depp</code>.</p>
+                <p>Anche le app di dodici fattori non si basano sull'esistenza implicita di qualsiasi strumento di
+                    sistema. Gli esempi includono sborsi a ImageMagick o<code>arricciare</code>. Sebbene questi
+                    strumenti possano esistere su molti o persino la maggior parte dei sistemi, non vi è alcuna garanzia
+                    che esistano su tutti i sistemi in cui l'app potrebbe essere eseguita in futuro o se la versione
+                    trovata su un sistema futuro sarà compatibile con l'app. Se l'app deve sborsare su uno strumento di
+                    sistema, tale strumento dovrebbe essere fornito nell'app.</p></article>
+        </div>
+    </div>
+    <div class="text-center mt-3" id="locales"><a href="/dependencies">English (en) </a> | <span> Italiano (it)</span></div>
+</div>
+</body>
+</html>
+

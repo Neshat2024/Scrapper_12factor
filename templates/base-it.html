@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Sito di scrapper a 12 fattori</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron text-center"><h1>Sito di scrapper a 12 fattori</h1></div>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <section class="abstract">
+                <article><h1 id="introduction">introduzione</h1>
+                    <p>Nell'era moderna, il software viene comunemente fornito come servizio: chiamato<em>app web</em>,
+                        O<em>software come un servizio</em>. L'app a dodici fattori è una metodologia per la costruzione
+                        di app software come servizio che:</p>
+                    <ul>
+                        <li>Utilizzo<strong>dichiarativa dichiarativo</strong>Formati per l'automazione di
+                            installazione, per ridurre al minimo il tempo e i costi per i nuovi sviluppatori che si
+                            uniscono al progetto;
+                        </li>
+                        <li>Avere un<strong>contratto pulito</strong>con il sistema operativo sottostante,
+                            offerta<strong>massima portabilità</strong>tra ambienti di esecuzione;
+                        </li>
+                        <li>Sono adatti per<strong>distribuzione</strong>su moderno<strong>piattaforme cloud</strong>,
+                            ovvio della necessità di server e amministrazione di sistemi;
+                        </li>
+                        <li><strong>Ridurre al minimo la divergenza</strong>tra sviluppo e produzione,
+                            abilitazione<strong>distribuzione continua</strong>per la massima agilità;
+                        </li>
+                        <li>E può<strong>ampliamento</strong>Senza cambiamenti significativi agli strumenti,
+                            all'architettura o alle pratiche di sviluppo.
+                        </li>
+                    </ul>
+                    <p>La metodologia di dodici fattori può essere applicata alle app scritte in qualsiasi linguaggio di
+                        programmazione e che utilizzano qualsiasi combinazione di servizi di supporto (database, coda,
+                        cache di memoria, ecc.).</p></article>
+                <article><h1 id="background">Sfondo</h1>
+                    <p>I contributori a questo documento sono stati direttamente coinvolti nello sviluppo e nello
+                        spiegamento di centinaia di app e hanno assistito indirettamente allo sviluppo, al funzionamento
+                        e al ridimensionamento di centinaia di migliaia di app tramite il nostro lavoro sul nostro
+                        lavoro<a href="http://www.heroku.com/" target="_blank">Heroku</a>piattaforma.</p>
+                    <p>Questo documento sintetizza tutta la nostra esperienza e osservazioni su un'ampia varietà di app
+                        software-as-a-service in natura. È una triangolazione sulle pratiche ideali per lo sviluppo
+                        delle app, prestando particolare attenzione alle dinamiche della crescita organica di un'app nel
+                        tempo, alle dinamiche della collaborazione tra gli sviluppatori che lavorano sulla base di
+                        codice dell'app e<a
+                                href="http://blog.heroku.com/archives/2011/6/28/the_new_heroku_4_erosion_resistance_explicit_contracts/"
+                                target="_blank">Evitare il costo dell'erosione del software</a>.</p>
+                    <p>La nostra motivazione è sensibilizzare su alcuni problemi sistemici che abbiamo visto nello
+                        sviluppo moderno delle applicazioni, per fornire un vocabolario condiviso per discutere di tali
+                        problemi e di offrire una serie di ampie soluzioni concettuali a tali problemi con terminologia
+                        di accompagnamento. Il formato si ispira ai libri di Martin Fowler<em><a
+                                href="https://books.google.com/books/about/Patterns_of_enterprise_application_archi.html?id=FyWZt5DdvFkC"
+                                target="_blank">Patterns of Enterprise Application Architecture</a></em>E<em><a
+                                href="https://books.google.com/books/about/Refactoring.html?id=1MsETFPD3I0C"
+                                target="_blank">Refactoring</a></em>.</p></article>
+                <article><h1 id="who_should_read_this_document">Chi dovrebbe leggere questo documento?</h1>
+                    <p>Eventuali applicazioni di costruzione di sviluppatori che funzionano come servizio. Ingegneri OPS
+                        che distribuiscono o gestiscono tali applicazioni.</p></article>
+                <article><h1 id="the_twelve_factors">I dodici fattori</h1>
+                    <div class="list-group"><a class="list-group-item list-group-item-action" href="./codebase-it"><h2
+                            id="i_codebase">I. CODEBASE</h2></a><a class="list-group-item list-group-item-action"
+                                                                   href="./dependencies-it"><h2 id="ii_dependencies">Ii.
+                        Dipendenze</h2></a><a class="list-group-item list-group-item-action" href="./config-it"><h2
+                            id="iii_config">Iii. Configurazione</h2></a><a
+                            class="list-group-item list-group-item-action" href="./backing-services-it"><h2
+                            id="iv_backing_services">IV. Servizi di supporto</h2></a><a
+                            class="list-group-item list-group-item-action" href="./build-release-run-it"><h2
+                            id="v_build_release_run">V. build, rilascio, corsa</h2></a><a
+                            class="list-group-item list-group-item-action" href="./processes-it"><h2 id="vi_processes">Vi.
+                        Processi</h2></a><a class="list-group-item list-group-item-action" href="./port-binding-it"><h2
+                            id="vii_port_binding">Vii. Binding della porta</h2></a><a
+                            class="list-group-item list-group-item-action" href="./concurrency-it"><h2
+                            id="viii_concurrency">Viii. Concorrenza</h2></a><a
+                            class="list-group-item list-group-item-action" href="./disposability-it"><h2
+                            id="ix_disposability">Ix. Disponibilità</h2></a><a
+                            class="list-group-item list-group-item-action" href="./dev-prod-parity-it"><h2
+                            id="x_devprod_parity">X. Dev/Prod parity</h2></a><a
+                            class="list-group-item list-group-item-action" href="./logs-it"><h2 id="xi_logs">Xi.
+                        Tronchi</h2></a><a class="list-group-item list-group-item-action" href="./admin-processes-it"><h2
+                            id="xii_admin_processes">XII. Processi di amministrazione</h2></a></div>
+                </article>
+            </section>
+        </div>
+    </div>
+    <div class="text-center mt-3" id="locales"><a href="/">English (en) </a> | <span> Italiano (it)</span></div>
+</div>
+</body>
+</html>
+

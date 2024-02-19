@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Disponibilità</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <article><h2 id="ix_disposability">Ix. Disponibilità</h2>
+                <h3 id="maximize_robustness_with_fast_startup_and_graceful_shutdown">Massimizza la robustezza con
+                    l'avvio rapido e l'arresto grazioso</h3>
+                <p><strong>Le app a dodici fattori<a href="./processes">processi</a>Sono<em>monouso</em>, nel senso che
+                    possono essere avviati o fermati in un momento.</strong>Ciò facilita il ridimensionamento elastico
+                    rapido, il rapido implementazione di<a href="./codebase">codice</a>O<a href="./config">configurazione</a>Cambiamenti
+                    e robustezza delle distribuzioni di produzione.</p>
+                <p>I processi dovrebbero sforzarsi<strong>Ridurre al minimo il tempo di avvio</strong>. Idealmente, un
+                    processo richiede alcuni secondi dal momento in cui il comando di lancio viene eseguito fino a
+                    quando il processo non è pronto e pronto a ricevere richieste o lavori. Il breve tempo di avvio
+                    fornisce più agilità per<a href="./build-release-run">pubblicazione</a>processo e ridimensionamento;
+                    E aiuta la robustezza, perché il responsabile del processo può spostare più facilmente i processi su
+                    nuove macchine fisiche se garantito.</p>
+                <p>Processi<strong>chiudi con grazia quando ricevono un<a href="http://en.wikipedia.org/wiki/SIGTERM">Upinem</a></strong>segnale
+                    dal gestore del processo. Per un processo Web, il grazioso arresto viene raggiunto cessando di
+                    ascoltare la porta di servizio (rifiutando così eventuali nuove richieste), consentendo di terminare
+                    eventuali richieste correnti e quindi uscire. In questo modello è implicito che le richieste di HTTP
+                    sono brevi (non più di qualche secondo) o, nel caso del sondaggio lungo, il cliente dovrebbe tentare
+                    perfettamente di riconnettersi quando la connessione è persa.</p>
+                <p>Per un processo di lavoratore, il grazioso arresto si ottiene restituendo il lavoro attuale alla coda
+                    di lavoro. Ad esempio,<a href="http://www.rabbitmq.com/">Rabbitmq</a>Il lavoratore può inviare un
+                    file<a href="http://www.rabbitmq.com/amqp-0-9-1-quickref.html#basic.nack"><code>Nack</code></a>;
+                    SU<a href="https://beanstalkd.github.io">Beanstalkd</a>, il lavoro viene restituito automaticamente
+                    in coda ogni volta che un lavoratore si disconnette. Sistemi a base di blocchi come<a
+                            href="https://github.com/collectiveidea/delayed_job#readme">Lavoro ritardato</a>È necessario
+                    essere sicuri di rilasciare il loro blocco sul record di lavoro. Implicito in questo modello è che
+                    tutti i lavori lo sono<a
+                            href="http://en.wikipedia.org/wiki/Reentrant_%28subroutine%29">rientrante</a>, che in genere
+                    si ottiene avvolgendo i risultati in una transazione o effettuando l'operazione<a
+                            href="http://en.wikipedia.org/wiki/Idempotence">Idempotenti</a>.</p>
+                <p>Anche i processi dovrebbero essere<strong>robusto contro la morte improvvisa</strong>, nel caso di un
+                    fallimento nell'hardware sottostante. Mentre questo è un evento molto meno comune di un grazioso
+                    arresto con<code>Upinem</code>, può ancora succedere. Un approccio raccomandato è l'uso di un
+                    robusto back -end di accodamento, come Beanstalkd, che restituisce lavori in coda quando i clienti
+                    si disconnettono o si disconnettono. Ad ogni modo, un'app di dodici fattori è archiviata per gestire
+                    terminazioni impreviste e non cari.<a href="http://lwn.net/Articles/191059/">Design di sola
+                        crash</a>Porta questo concetto al suo<a
+                            href="http://docs.couchdb.org/en/latest/intro/overview.html">conclusione logica</a>.</p>
+            </article>
+        </div>
+    </div>
+    <div class="text-center mt-3" id="locales"><a href="/disposability">English (en) </a> | <span> Italiano (it)</span></div>
+</div>
+</body>
+</html>
+

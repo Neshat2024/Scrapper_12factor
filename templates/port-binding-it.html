@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Binding delle porte</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <article><h2 id="vii_port_binding">VII. Collegamento delle porte</h2>
+                <h3 id="export_services_via_port_binding">Esporta i servizi tramite l'associazione delle porte</h3>
+                <p>Le app Web vengono talvolta eseguite all'interno di un contenitore di server Web. Ad esempio, le app
+                    PHP potrebbero essere eseguite come modulo all'interno<a href="http://httpd.apache.org/">Apache
+                        HTTPD</a>oppure le app Java potrebbero essere eseguite all'interno<a
+                            href="http://tomcat.apache.org/">Gatto</a>.</p>
+                <p><strong>L'app a dodici fattori è completamente autonoma</strong>e non si basa sull'inserimento in
+                    fase di esecuzione di un server Web nell'ambiente di esecuzione per creare un servizio con
+                    connessione Web. L'applicazione web<strong>esporta HTTP come servizio eseguendo l'associazione a una
+                        porta</strong>e ascoltando le richieste in arrivo su quella porta.</p>
+                <p>In un ambiente di sviluppo locale, lo sviluppatore visita un URL di servizio come<code>http://localhost:5000/</code>per
+                    accedere al servizio esportato dalla loro app. Nella distribuzione, un livello di routing gestisce
+                    le richieste di routing da un nome host pubblico ai processi Web associati alla porta.</p>
+                <p>Questa operazione viene in genere implementata utilizzando<a href="./dependencies">Dichiarazione di
+                    dipendenza</a>per aggiungere una libreria del server Web all'app, ad esempio<a
+                        href="http://www.tornadoweb.org/">Tornado</a>per Python,<a
+                        href="http://code.macournoyer.com/thin/">Sottile</a>per Rubino, o<a
+                        href="http://www.eclipse.org/jetty/">Molo</a>per Java e altri linguaggi basati su JVM. Questo
+                    avviene interamente in<em>Spazio utente</em>, ovvero all'interno del codice dell'app. Il contratto
+                    con l'ambiente di esecuzione è vincolante a una porta per soddisfare le richieste.</p>
+                <p>HTTP non è l'unico servizio che può essere esportato tramite port binding. Quasi tutti i tipi di
+                    software server possono essere eseguiti tramite un processo che si lega a una porta e attende le
+                    richieste in arrivo. Ecco alcuni esempi:<a href="http://www.ejabberd.im/">ejabberd</a>(parlando<a
+                            href="http://xmpp.org/">XMPP</a>), e<a href="http://redis.io/">Redis</a>(Parlando il<a
+                            href="http://redis.io/topics/protocol">Protocollo Redis</a>).</p>
+                <p>Si noti inoltre che l'approccio di associazione delle porte significa che un'app può diventare il<a
+                        href="./backing-services">Servizio di supporto</a>per un'altra app, fornendo l'URL all'app di
+                    supporto come handle di risorsa nel file<a href="./config">configurazione</a>per l'app di consumo.
+                </p></article>
+        </div>
+    </div>
+    <div class="text-center mt-3" id="locales"><a href="/port-binding">English (en) </a> | <span> Italiano (it)</span></div>
+</div>
+</body>
+</html>
+

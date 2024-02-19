@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Dev/Prod Party</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <article><h2 id="x_devprod_parity">X. Dev/Prod parity</h2>
+                <h3 id="keep_development_staging_and_production_as_similar_as_possible">Mantenere lo sviluppo, la messa
+                    in scena e la produzione il più simili possibile</h3>
+                <p>Storicamente, ci sono stati sostanziali lacune tra lo sviluppo (uno sviluppatore che ha fatto
+                    modifiche dal vivo a un locale<a href="./codebase">distribuire</a>dell'app) e della produzione (una
+                    distribuzione in esecuzione dell'app consultata dagli utenti finali). Queste lacune si manifestano
+                    in tre aree:</p>
+                <ul>
+                    <li><strong>Il divario temporale</strong>: Uno sviluppatore può lavorare sul codice che richiede
+                        giorni, settimane o addirittura mesi per andare in produzione.
+                    </li>
+                    <li><strong>Il divario del personale</strong>: Gli sviluppatori scrivono codice, gli ingegneri OPS
+                        lo distribuiscono.
+                    </li>
+                    <li><strong>Il divario degli strumenti</strong>: Gli sviluppatori potrebbero utilizzare uno stack
+                        come NGINX, SQLite e OS X, mentre la produzione distribuisce Apache, Mysql e Linux.
+                    </li>
+                </ul>
+                <p><strong>L'app a dodici fattori è progettata per<a
+                        href="http://avc.com/2011/02/continuous-deployment/">distribuzione continua</a>Mantenendo il
+                    divario tra sviluppo e produzione.</strong>Guardando le tre lacune sopra descritte:</p>
+                <ul>
+                    <li>Rendi il divario di tempo piccolo: uno sviluppatore può scrivere codice e farlo distribuire ore
+                        o anche pochi minuti dopo.
+                    </li>
+                    <li>Rendi il divario del personale piccolo: gli sviluppatori che hanno scritto il codice sono
+                        strettamente coinvolti nella distribuzione e nella visione del suo comportamento in produzione.
+                    </li>
+                    <li>Rendi piccoli strumenti piccoli: mantieni lo sviluppo e la produzione il più simili possibile.
+                    </li>
+                </ul>
+                <p>Riassumendo quanto sopra in una tabella:</p>
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>App tradizionale</th>
+                        <th>App a dodici fattori</th>
+                    </tr>
+                    <tr>
+                        <th>Tempo tra schieramenti</th>
+                        <td>Settimane</td>
+                        <td>Ore</td>
+                    </tr>
+                    <tr>
+                        <th>Autori di codice vs Distributori di codice</th>
+                        <td>Persone diverse</td>
+                        <td>Stesse persone</td>
+                    </tr>
+                    <tr>
+                        <th>Dev vs ambienti di produzione</th>
+                        <td>Divergente</td>
+                        <td>Il più simile possibile</td>
+                    </tr>
+                </table>
+                <p><a href="./backing-services">Servizi di supporto</a>, come il database dell'app, il sistema di
+                    accodamento o la cache, è un'area in cui la parità Dev/Prod è importante. Molte lingue offrono
+                    librerie che semplificano l'accesso al servizio di supporto, incluso<em>adattatori</em>a diversi
+                    tipi di servizi. Alcuni esempi sono nella tabella seguente.</p>
+                <table>
+                    <tr>
+                        <th>Tipa Tipo</th>
+                        <th>Lingua</th>
+                        <th>Biblioteca</th>
+                        <th>Adattatori</th>
+                    </tr>
+                    <tr>
+                        <td>Banca dati</td>
+                        <td>Ruby/Rils</td>
+                        <td>Actirecord</td>
+                        <td>Mysql, postgresql, sqlite</td>
+                    </tr>
+                    <tr>
+                        <td>Coda</td>
+                        <td>Python/Django</td>
+                        <td>Sedano</td>
+                        <td>RabbitMQ, Beanstalkd, Redis</td>
+                    </tr>
+                    <tr>
+                        <td>Cache</td>
+                        <td>Ruby/Rils</td>
+                        <td>ActiveSupport :: Cache</td>
+                        <td>Memoria, filesystem, memcached</td>
+                    </tr>
+                </table>
+                <p>Gli sviluppatori a volte trovano un grande fascino nell'uso di un servizio di sostegno leggero nei
+                    loro ambienti locali, mentre un servizio di supporto più serio e robusto verrà utilizzato nella
+                    produzione. Ad esempio, usando SQLite localmente e PostgreSQL in produzione; o memoria di processo
+                    locale per la memorizzazione nella cache in sviluppo e memcache nella produzione.</p>
+                <p><strong>Lo sviluppatore di dodici fattori resiste all'impulso di utilizzare diversi servizi di
+                    supporto tra sviluppo e produzione</strong>, anche quando gli adattatori teoricamente astraggono
+                    eventuali differenze nei servizi di supporto. Le differenze tra i servizi di supporto significano
+                    che spuntano piccole incompatibilità, causando codice che ha funzionato e superato i test nello
+                    sviluppo o nella stadiazione per fallire nella produzione. Questi tipi di errori creano attrito che
+                    disincentivi la distribuzione continua. Il costo di questo attrito e il successivo smorzamento della
+                    distribuzione continua sono estremamente elevati se considerati aggregati per tutta la vita di
+                    un'applicazione.</p>
+                <p>I servizi locali leggeri sono meno convincenti di quanto non fossero una volta. I moderni servizi di
+                    supporto come Memcached, PostgreSQL e RabbitMQ non sono difficili da installare ed eseguire grazie
+                    ai moderni sistemi di imballaggio, come<a href="http://mxcl.github.com/homebrew/">Homebrew</a>E<a
+                            href="https://help.ubuntu.com/community/AptGet/Howto">Apt-get</a>. In alternativa, strumenti
+                    di provisioning dichiarativo come<a href="http://www.opscode.com/chef/">Capocuoca Capocuoco</a>E<a
+                            href="http://docs.puppetlabs.com/">Fantoccia Fantoccio</a>combinato con ambienti virtuali
+                    leggeri come<a href="https://www.docker.com/">Docker</a>E<a href="http://vagrantup.com/">Vagabonda
+                        Vagabondo</a>Consenti agli sviluppatori di eseguire ambienti locali che si avvicinano da vicino
+                    agli ambienti di produzione. Il costo dell'installazione e dell'utilizzo di questi sistemi è basso
+                    rispetto ai benefici della parità Dev/Prod e della distribuzione continua.</p>
+                <p>Gli adattatori a diversi servizi di supporto sono ancora utili, perché rendono il porting ai nuovi
+                    servizi di supporto relativamente indolore. Ma tutte le distribuzioni dell'app (ambienti per
+                    sviluppatori, stadiazione, produzione) dovrebbero utilizzare lo stesso tipo e versione di ciascuno
+                    dei servizi di supporto.</p></article>
+        </div>
+    </div>
+    <div class="text-center mt-3" id="locales"><a href="/dev-prod-parity">English (en) </a> | <span> Italiano (it)</span></div>
+</div>
+</body>
+</html>
+

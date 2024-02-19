@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Tronchi</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <article><h2 id="xi_logs">Xi. Tronchi</h2>
+                <h3 id="treat_logs_as_event_streams">Tratta i registri come flussi di eventi</h3>
+                <p><em>Tronchi</em>Fornire visibilità sul comportamento di un'app in esecuzione. In ambienti basati su
+                    server sono comunemente scritti su un file su disco (un "logfile"); Ma questo è solo un formato di
+                    output.</p>
+                <p>I registri sono il<a href="https://adam.herokuapp.com/past/2011/4/1/logs_are_streams_not_files/">flusso</a>di
+                    eventi aggregati e ordinati nel tempo raccolti dai flussi di output di tutti i processi in
+                    esecuzione e servizi di supporto. I registri nella loro forma grezza sono in genere un formato di
+                    testo con un evento per riga (anche se i backtrace da eccezioni possano coprire più righe). I
+                    registri non hanno inizio o fine fisso, ma fluiscono continuamente finché l'app funziona.</p>
+                <p><strong>Un'app di dodici fattori non si preoccupa mai di routing o memoria del suo flusso di
+                    output.</strong>Non dovrebbe tentare di scrivere o gestire i file di log. Invece, ogni processo in
+                    esecuzione scrive il suo flusso di eventi, non purerato, a<code>stdout</code>. Durante lo sviluppo
+                    locale, lo sviluppatore vedrà questo flusso in primo piano del loro terminale per osservare il
+                    comportamento dell'app.</p>
+                <p>Nella messa in scena o distribuzioni di produzione, il flusso di ogni processo verrà acquisito
+                    dall'ambiente di esecuzione, raccolto insieme a tutti gli altri flussi dall'app e instradato a una o
+                    più destinazioni finali per la visione e l'archiviazione a lungo termine. Queste destinazioni
+                    d'archivio non sono visibili o configurabili dall'app e invece sono completamente gestite
+                    dall'ambiente di esecuzione. Router di registro open source (come<a
+                            href="https://github.com/heroku/logplex">Logplex</a>E<a
+                            href="https://github.com/fluent/fluentd">Fluentd</a>) sono disponibili per questo scopo.</p>
+                <p>Il flusso di eventi per un'app può essere indirizzato a un file o guardato tramite la coda in tempo
+                    reale in un terminale. Più significativamente, il flusso può essere inviato a un sistema di
+                    indicizzazione e analisi del registro come<a href="http://www.splunk.com/">Splunk</a>o un sistema di
+                    data warehousing per uso generale come<a href="http://hive.apache.org/">Hadoop/Hive</a>. Questi
+                    sistemi consentono una grande potenza e flessibilità per l'introspezione del comportamento di un'app
+                    nel tempo, tra cui:</p>
+                <ul>
+                    <li>Trovare eventi specifici in passato.</li>
+                    <li>Grafica su larga scala delle tendenze (come richieste al minuto).</li>
+                    <li>Avviso attivo in base all'euristica definita dall'utente (come un avviso quando la quantità di
+                        errori al minuto supera una determinata soglia).
+                    </li>
+                </ul>
+            </article>
+        </div>
+    </div>
+    <div class="text-center mt-3" id="locales"><a href="/logs">English (en) </a> | <span> Italiano (it)</span></div>
+</div>
+</body>
+</html>
+

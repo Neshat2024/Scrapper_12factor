@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12-factor Scrapper Site</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron text-center">
+        <h1>12-factor Scrapper Site</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <section class="abstract">
+                <article>
+                    <h1 id="introduction">Introduction</h1>
+                    <p>In the modern era, software is commonly delivered as a service: called <em>web apps</em>, or <em>software-as-a-service</em>.
+                        The twelve-factor app is a methodology for building software-as-a-service apps that:</p>
+                    <ul>
+                        <li>Use <strong>declarative</strong> formats for setup automation, to minimize time and cost for
+                            new developers joining the project;
+                        </li>
+                        <li>Have a <strong>clean contract</strong> with the underlying operating system, offering
+                            <strong>maximum portability</strong> between execution environments;
+                        </li>
+                        <li>Are suitable for <strong>deployment</strong> on modern <strong>cloud platforms</strong>,
+                            obviating the need for servers and systems administration;
+                        </li>
+                        <li><strong>Minimize divergence</strong> between development and production, enabling <strong>continuous
+                            deployment</strong> for maximum agility;
+                        </li>
+                        <li>And can <strong>scale up</strong> without significant changes to tooling, architecture, or
+                            development practices.
+                        </li>
+                    </ul>
+                    <p>The twelve-factor methodology can be applied to apps written in any programming language, and
+                        which use any combination of backing services (database, queue, memory cache, etc).</p>
+                </article>
+
+                <article>
+                    <h1 id="background">Background</h1>
+                    <p>The contributors to this document have been directly involved in the development and deployment
+                        of hundreds of apps, and indirectly witnessed the development, operation, and scaling of
+                        hundreds of thousands of apps via our work on the <a href="http://www.heroku.com/"
+                                                                             target="_blank">Heroku</a> platform.</p>
+                    <p>This document synthesizes all of our experience and observations on a wide variety of
+                        software-as-a-service apps in the wild. It is a triangulation on ideal practices for app
+                        development, paying particular attention to the dynamics of the organic growth of an app over
+                        time, the dynamics of collaboration between developers working on the app’s codebase, and <a
+                                href="http://blog.heroku.com/archives/2011/6/28/the_new_heroku_4_erosion_resistance_explicit_contracts/"
+                                target="_blank">avoiding the cost of software erosion</a>.</p>
+                    <p>Our motivation is to raise awareness of some systemic problems we’ve seen in modern application
+                        development, to provide a shared vocabulary for discussing those problems, and to offer a set of
+                        broad conceptual solutions to those problems with accompanying terminology. The format is
+                        inspired by Martin Fowler’s books <em><a
+                                href="https://books.google.com/books/about/Patterns_of_enterprise_application_archi.html?id=FyWZt5DdvFkC"
+                                target="_blank">Patterns of Enterprise Application Architecture</a></em> and <em><a
+                                href="https://books.google.com/books/about/Refactoring.html?id=1MsETFPD3I0C"
+                                target="_blank">Refactoring</a></em>.</p>
+                </article>
+
+                <article>
+                    <h1 id="who_should_read_this_document">Who should read this document?</h1>
+                    <p>Any developer building applications which run as a service. Ops engineers who deploy or manage
+                        such applications.</p>
+                </article>
+
+                <article>
+                    <h1 id="the_twelve_factors">The Twelve Factors</h1>
+                    <div class="list-group">
+                        <a href="./codebase" class="list-group-item list-group-item-action"><h2 id="i_codebase">I.
+                            Codebase</h2></a>
+                        <a href="./dependencies" class="list-group-item list-group-item-action"><h2
+                                id="ii_dependencies">II. Dependencies</h2></a>
+                        <a href="./config" class="list-group-item list-group-item-action"><h2 id="iii_config">III.
+                            Config</h2></a>
+                        <a href="./backing-services" class="list-group-item list-group-item-action"><h2
+                                id="iv_backing_services">IV. Backing services</h2></a>
+                        <a href="./build-release-run" class="list-group-item list-group-item-action"><h2
+                                id="v_build_release_run">V. Build, release, run</h2></a>
+                        <a href="./processes" class="list-group-item list-group-item-action"><h2 id="vi_processes">VI.
+                            Processes</h2></a>
+                        <a href="./port-binding" class="list-group-item list-group-item-action"><h2
+                                id="vii_port_binding">VII. Port binding</h2></a>
+                        <a href="./concurrency" class="list-group-item list-group-item-action"><h2
+                                id="viii_concurrency">VIII. Concurrency</h2></a>
+                        <a href="./disposability" class="list-group-item list-group-item-action"><h2
+                                id="ix_disposability">IX. Disposability</h2></a>
+                        <a href="./dev-prod-parity" class="list-group-item list-group-item-action"><h2
+                                id="x_devprod_parity">X. Dev/prod parity</h2></a>
+                        <a href="./logs" class="list-group-item list-group-item-action"><h2 id="xi_logs">XI. Logs</h2>
+                        </a>
+                        <a href="./admin-processes" class="list-group-item list-group-item-action"><h2
+                                id="xii_admin_processes">XII. Admin processes</h2></a>
+                    </div>
+                </article>
+            </section>
+        </div>
+    </div>
+
+    <div id="locales" class="text-center mt-3">
+        <a href="/it">Italiano (it)</a> | <span>English (en)</span>
+    </div>
+</div>
+</body>
+</html>

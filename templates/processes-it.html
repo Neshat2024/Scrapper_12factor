@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Processi</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <article><h2 id="vi_processes">Vi. Processi</h2>
+                <h3 id="execute_the_app_as_one_or_more_stateless_processes">Eseguire l'app come uno o più processi
+                    apolidi</h3>
+                <p>L'app viene eseguita nell'ambiente di esecuzione come uno o più<em>processi</em>.</p>
+                <p>Nel caso più semplice, il codice è uno script autonomo, l'ambiente di esecuzione è il laptop locale
+                    di uno sviluppatore con un runtime in linguaggio installato e il processo viene lanciato tramite la
+                    riga di comando (ad esempio, ad esempio,<code>pithon my_script.py</code>). Dall'altra parte dello
+                    spettro, una produzione distribuita di un'app sofisticata può utilizzare molti<a
+                            href="./concurrency">Tipi di processo, istanziati a zero o più processi di esecuzione</a>.
+                </p>
+                <p><strong>I processi di dodici fattori sono apolidi e<a
+                        href="http://en.wikipedia.org/wiki/Shared_nothing_architecture">share-nothing</a>.</strong>Tutti
+                    i dati che devono persistere devono essere archiviati in uno stato<a href="./backing-services">servizio
+                        di supporto</a>, in genere un database.</p>
+                <p>Lo spazio di memoria o il filesystem del processo può essere utilizzato come una breve cache di
+                    transazione singola. Ad esempio, scaricare un file di grandi dimensioni, funzionare su di esso e
+                    memorizzare i risultati dell'operazione nel database. L'app a dodici fattori non presume mai che
+                    qualcosa di memorizzato nella memoria o sul disco sarà disponibile su una richiesta o un lavoro
+                    futuri-con molti processi di ogni tipo in esecuzione, è probabile che una richiesta futura venga
+                    servita da un processo diverso. Anche quando si eseguono un solo processo, un riavvio (attivato da
+                    Distribuzioni di codice, modifica della configurazione o l'ambiente di esecuzione che trasferisce il
+                    processo in una posizione fisica diversa) di solito cancellerà lo stato locale (ad es. Memoria e
+                    filesystem).</p>
+                <p>Packagers come<a href="http://code.google.com/p/django-assetpackager/">Django-Assetpackager</a>Utilizzare
+                    il filesystem come cache per le risorse compilate. Un'app di dodici fattori preferisce fare questo
+                    compilazione durante il<a href="/build-release-run">fase di costruzione</a>. Imballaggio di attività
+                    come<a href="http://documentcloud.github.io/jammit/">Jammit</a>e il<a
+                            href="http://ryanbigg.com/guides/asset_pipeline.html">Pipeline delle risorse Rails</a>può
+                    essere configurato per le risorse del pacchetto durante la fase di build.</p>
+                <p>Alcuni sistemi web si basano<a
+                        href="http://en.wikipedia.org/wiki/Load_balancing_%28computing%29#Persistence">"Sessioni
+                    appiccicose"</a>- Cioè, la memorizzazione nella cache dei dati della sessione utente in memoria del
+                    processo dell'app e si aspettano che le richieste future dallo stesso visitatore vengano instradate
+                    allo stesso processo. Le sessioni appiccicose sono una violazione di dodici fattori e non dovrebbero
+                    mai essere usate o su cui si affidano. I dati dello stato di sessione sono un buon candidato per un
+                    dataStore che offre un'espirazione del tempo, come<a href="http://memcached.org/">Memcached</a>O<a
+                            href="http://redis.io/">Redis</a>.</p></article>
+        </div>
+    </div>
+    <div class="text-center mt-3" id="locales"><a href="/processes">English (en) </a> | <span> Italiano (it)</span></div>
+</div>
+</body>
+</html>
+
